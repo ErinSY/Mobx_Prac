@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# MobX 연습 1 \_ 카운터 만들기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> CounterStore에 변화될 값 (count) , Action (1씩증가 / 1씩감소) 를 설정해주고 CounterComponent컴포넌트로 가져와 '+'버튼을 누르면 +1, '-'버튼을 누르면 -1 되는 기능구현
 
-## Available Scripts
+## `observable` `action` `makeObservable` `inject` `observer` `Provider` 활용
 
-In the project directory, you can run:
+- `observable` : 변화가 감지되어야하는 값 (react에서 state개념)들을 객체로 관리
+- `action` : 상태의 변화를 일으키는 함수 -`makeObservable` : ES6부터 도입된 기능으로, store컴포넌트에 아래와 같이 constructor을 생성해 주어야 state를 사용하는 컴포넌트에서 변화를 감지한다.
 
-### `yarn start`
+```js
+constructor() {
+    makeObservable(this); //이부분을 꼭!! 생성해주어야 함
+  }
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-`inject` : Next.js는 여러 스토어를 사용할 수 있다. inject로 컴포넌트 마다 어떤 스토어를 주입할 것인지 정할 수 있음
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-`observer` : state 를 사용할 컴포넌트가 변화를 주시하고 있다는 것을 표시
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `Provider` : 최상위 태그인 index.js에 사용하여 하위 모든 컴포넌트에서 state를 가져와 사용할 수 있도록 해줌.
+  ⭐️ value에 어떤 스토어를 사용하는지 작성해주어야함
+  ```js
+  <Provider value={CounterStore}>
+  ```

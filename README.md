@@ -1,6 +1,7 @@
 # MobX 연습 1 \_ 카운터 만들기
 
 > CounterStore에 변화될 값 (count) , Action (1씩증가 / 1씩감소) 를 설정해주고 CounterComponent컴포넌트로 가져와 '+'버튼을 누르면 +1, '-'버튼을 누르면 -1 되는 기능구현
+<br>
 
 ## `observable` `action` `makeObservable` `inject` `observer` `Provider` 활용
 
@@ -13,9 +14,9 @@ constructor() {
   }
 ```
 
--`inject` : Next.js는 여러 스토어를 사용할 수 있다. inject로 컴포넌트 마다 어떤 스토어를 주입할 것인지 정할 수 있음
+- `inject` : Next.js는 여러 스토어를 사용할 수 있다. inject로 컴포넌트 마다 어떤 스토어를 주입할 것인지 정할 수 있음
 
--`observer` : state 를 사용할 컴포넌트가 변화를 주시하고 있다는 것을 표시
+- `observer` : state 를 사용할 컴포넌트가 변화를 주시하고 있다는 것을 표시
 
 - `Provider` : 최상위 태그인 index.js에 사용하여 하위 모든 컴포넌트에서 state를 가져와 사용할 수 있도록 해줌.
   ⭐️ value에 어떤 스토어를 사용하는지 작성해주어야함
